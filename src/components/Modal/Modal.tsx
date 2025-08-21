@@ -28,8 +28,12 @@ function Modal({ children, onClose }: ModalProps) {
   );
 
   useEffect(() => {
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+    addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden"; 
+    return () => {
+    removeEventListener("keydown", handleEsc);
+    document.body.style.overflow = "auto"; 
+    };
   }, [handleEsc]);
 
   return createPortal(

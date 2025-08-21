@@ -10,12 +10,13 @@ interface NoteListProps {
 const NoteList = ({ notes }: NoteListProps) => {
   const queryClient = useQueryClient();
 
-   const { mutate: removeNote } = useMutation<void, Error, string>({
+   const { mutate: removeNote } = useMutation<Note, Error, string>({
      mutationFn: deleteNote,
      onSuccess: () => {
        queryClient.invalidateQueries({ queryKey: ["notes"] });
      },
    });
+
 
   const handleDelete = (noteId: string) => {
     removeNote(noteId);
